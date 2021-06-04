@@ -2,6 +2,22 @@
 #include <iostream>
 class Matrix
 {
+public:
+int rows_ = 0;
+int cols_ = 0;
+int** matrix = new int* [rows_];
+Matrix(int rows, int cols);
+void Reset(int rows, int cols);
+int At(int i, int j) const;
+int& At(int i, int j);
+int GetNumRows(int rows) const;
+int GetNumColumns(int cols) const;
+std::ostream& operator<< (std::ostream &out, const Matrix &matrix);
+std::ostream& operator>> (std::ostream &in, const Matrix &matrix);
+Matrix operator+(Matrix& a);
+
+}
+
 Matrix(int rows, int cols)
     {
         try
@@ -41,7 +57,7 @@ int& At(int i, int j) {try{
     {throw std::out_of_range;}
     return matrix[i][j];}}
 int GetNumRows(int rows) const {return rows_};
-int GetNumRows(int cols) const {return cols_};
+int GetNumColumns(int cols) const {return cols_};
 
 std::ostream& operator<< (std::ostream &out, const Matrix &matrix)
 {
@@ -96,9 +112,4 @@ bool operator== (const Matrix &c1, const Matrix &c2)
 {
     return (c1.m_company == c2.m_company &&
             c1.m_model== c2.m_model);
-}
-int rows_ = 0;
-int cols_ = 0;
-int** matrix = new int* [rows_];
-
 }
